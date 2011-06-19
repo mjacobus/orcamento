@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :tipo %><br />
-    <%= f.text_field :tipo %>
+    <%= f.select :tipo, {'despesa' => -1, 'receita' => 1} %>
   </div>
   <div class="field">
     <%= f.label :valor %><br />
