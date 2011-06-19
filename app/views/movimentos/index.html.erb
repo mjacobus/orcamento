@@ -18,8 +18,8 @@
     <td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
     <td><%= to_currency(movimento.valor) %></td>
     <!-- ><td><%= movimento.valor_corrigido %></td> -->
-    <td><%= to_date(movimento.pagar_em)  %></td>
-    <td><%= to_date(movimento.data_pagamento) %></td>
+    <td><%= to_date(movimento.data_prevista)  %></td>
+    <td><%= to_date(movimento.data_realizacao) %></td>
     <td><%= movimento.descricao %></td>
     <td><%= link_to 'Show', movimento %></td>
     <td><%= link_to 'Edit', edit_movimento_path(movimento) %></td>

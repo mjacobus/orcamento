@@ -7,22 +7,24 @@
 
 <p>
   <b>Valor:</b>
-  <%= @movimento.valor %>
+  <%= to_currency @movimento.valor %>
 </p>
 
+<!-- 
 <p>
   <b>Valor corrigido:</b>
   <%= @movimento.valor_corrigido %>
 </p>
+-->
 
 <p>
-  <b>Pagar em:</b>
-  <%= @movimento.pagar_em %>
+  <b>Previsto para:</b>
+  <%= to_date @movimento.data_prevista %>
 </p>
 
 <p>
-  <b>Data pagamento:</b>
-  <%= @movimento.data_pagamento %>
+  <b>Realizado em:</b>
+  <%= to_date @movimento.data_realizacao %>
 </p>
 
 <p>
