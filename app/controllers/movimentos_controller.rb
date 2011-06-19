@@ -2,7 +2,7 @@ class MovimentosController < ApplicationController
   # GET /movimentos
   # GET /movimentos.xml
   def index
-    @movimentos = Movimento.all
+    @movimentos = Movimento.order(:data_prevista, :valor).all
 
     respond_to do |format|
       format.html # index.html.erb
