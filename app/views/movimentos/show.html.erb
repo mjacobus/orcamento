@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tipo:</b>
+  <%= @movimento.tipo %>
+</p>
+
+<p>
+  <b>Valor:</b>
+  <%= @movimento.valor %>
+</p>
+
+<p>
+  <b>Valor corrigido:</b>
+  <%= @movimento.valor_corrigido %>
+</p>
+
+<p>
+  <b>Pagar em:</b>
+  <%= @movimento.pagar_em %>
+</p>
+
+<p>
+  <b>Data pagamento:</b>
+  <%= @movimento.data_pagamento %>
+</p>
+
+<p>
+  <b>Descricao:</b>
+  <%= @movimento.descricao %>
+</p>
+
+
+<%= link_to 'Edit', edit_movimento_path(@movimento) %> |
+<%= link_to 'Back', movimentos_path %>

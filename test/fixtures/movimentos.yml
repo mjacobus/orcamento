@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tipo: 1
+  valor: 1.5
+  valor_corrigido: 1.5
+  pagar_em: 2011-06-19
+  data_pagamento: 2011-06-19
+  descricao: MyString
+
+two:
+  tipo: 1
+  valor: 1.5
+  valor_corrigido: 1.5
+  pagar_em: 2011-06-19
+  data_pagamento: 2011-06-19
+  descricao: MyString

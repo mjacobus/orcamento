@@ -1,0 +1,33 @@
+<h1>Listing movimentos</h1>
+
+<table>
+  <tr>
+    <th>Tipo</th>
+    <th>Valor</th>
+    <th>Valor corrigido</th>
+    <th>Pagar em</th>
+    <th>Data pagamento</th>
+    <th>Descricao</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @movimentos.each do |movimento| %>
+  <tr>
+    <td><%= movimento.tipo %></td>
+    <td><%= movimento.valor %></td>
+    <td><%= movimento.valor_corrigido %></td>
+    <td><%= movimento.pagar_em %></td>
+    <td><%= movimento.data_pagamento %></td>
+    <td><%= movimento.descricao %></td>
+    <td><%= link_to 'Show', movimento %></td>
+    <td><%= link_to 'Edit', edit_movimento_path(movimento) %></td>
+    <td><%= link_to 'Destroy', movimento, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Movimento', new_movimento_path %>
