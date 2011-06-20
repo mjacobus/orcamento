@@ -16,6 +16,10 @@
     <%= f.select :tipo, {'despesa' => -1, 'receita' => 1} %>
   </div>
   <div class="field">
+    <%= f.label :descricao %><br />
+    <%= f.text_field :descricao %>
+  </div>
+  <div class="field">
     <%= f.label :valor %><br />
     <%= f.text_field :valor %>
   </div>
@@ -31,12 +35,9 @@
   </div>
   <div class="field">
     <%= f.label :data_realizacao %><br />
-    <%= f.date_select :data_realizacao %>
+    <%= f.date_select :data_realizacao, :include_blank => true%>
   </div>
-  <div class="field">
-    <%= f.label :descricao %><br />
-    <%= f.text_field :descricao %>
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

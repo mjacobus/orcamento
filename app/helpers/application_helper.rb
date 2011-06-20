@@ -5,7 +5,9 @@ module ApplicationHelper
   end
   
   def to_date(date)
-    date.strftime("%d/%m/%Y")
+    if (date != nil) 
+      date.strftime("%d/%m/%Y")
+    end
   end
 
 end
