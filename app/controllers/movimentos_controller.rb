@@ -80,4 +80,16 @@ class MovimentosController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def pagos
+    @movimentos = Movimento.where('data_realizacao IS NOT NULL')
+    
+    render :index
+  end
+  
+  def pendentes
+    @movimentos = Movimento.where('data_realizacao IS NULL')
+    
+    render :index
+  end
 end

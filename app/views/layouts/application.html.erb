@@ -8,8 +8,14 @@
 	</head>
 	<body>
 
-		<div id="view">
-			<%= yield %>
+		<div id="content">
+			<div id="menu">
+				<%= menu %>
+			</div>		
+	
+			<div id="view">
+				<%= yield %>
+			</div>
 		</div>
 	</body>
 </html>

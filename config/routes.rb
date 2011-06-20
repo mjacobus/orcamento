@@ -1,6 +1,9 @@
 Orcamento::Application.routes.draw do
   resources :pessoas
 
+  match 'movimentos/pagos', :controller => :movimentos, :action => 'pagos'
+  match 'movimentos/pendentes', :controller => :movimentos, :action => 'pendentes'
+
   resources :movimentos
 
   # The priority is based upon order of creation:
