@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Quem:</b>
+  <%= @movimento.pessoa.nome %>
+</p>
+
+<p>
   <b>Tipo:</b>
-  <%= @movimento.tipo %>
+  <%= @movimento.tipo > 0 ? 'Receita' : 'Despesa' %>
 </p>
 
 <p>

@@ -9,4 +9,6 @@ class Movimento < ActiveRecord::Base
     
   end
   
+  
+  belongs_to :pessoa
 end

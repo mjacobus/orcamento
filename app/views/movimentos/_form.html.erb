@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+	<div class="field">
+    <%= f.label :pessoa %><br />
+    <%= f.collection_select(:pessoa_id,Pessoa.order(:nome),:id,:nome, {:prompt => true}) %>
+  </div>
   <div class="field">
     <%= f.label :tipo %><br />
     <%= f.select :tipo, {'despesa' => -1, 'receita' => 1} %>

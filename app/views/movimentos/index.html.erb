@@ -1,6 +1,7 @@
 <h1>Listing movimentos</h1>
 <table>
 	<tr>
+		<th>Quem</th>
 		<th>Tipo</th>
 		<!-- <th>Valor corrigido</th> -->
 		<th>Descricao</th>
@@ -21,6 +22,7 @@
 	    	total += movimento.valor * movimento.tipo;
 		%>
 		<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (movimento.tipo < 0) %>">
+			<td><%= movimento.pessoa.nome %></td>
 			<td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
 			<!-- ><td><%= movimento.valor_corrigido %></td> -->
 			<td><%= movimento.descricao %></td>
@@ -35,6 +37,7 @@
 
 	<% i+=1 %>
 	<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (total < 0) %>">
+		<td></td>
 		<td></td>
 		<td></td>
 		<td></td>
