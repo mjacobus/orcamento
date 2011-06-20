@@ -1,0 +1,42 @@
+body {
+	background:#888888;
+	margin: 0;
+}
+
+#view {
+	width: 800px;
+	margin: 0 auto;
+	background: white;
+	padding: 5px;
+	border: 1px solid #555555;
+}
+
+ table {
+ 	width: 100%;
+ }
+ 
+ th {
+ 	background:black;
+ 	color:white;
+ }
+ 
+ th.actions {
+ 	background: none;
+ }
+ 
+ tr.even td{
+ 	background: #eee;
+ }
+ 
+ .money {
+ 	text-align: right;
+ 	color: blue;
+ 	padding-right: 5px;
+ }
+ tr.despesa .money {
+ 	color: red;
+ }
+ 
+ th.actions {
+ 	width: 30px;
+ }

@@ -1,33 +1,51 @@
 <h1>Listing movimentos</h1>
-
 <table>
-  <tr>
-    <th>Tipo</th>
-    <th>Valor</th>
-    <!-- <th>Valor corrigido</th> -->
-    <th>Pagar em</th>
-    <th>Data pagamento</th>
-    <th>Descricao</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th>Tipo</th>
+		<!-- <th>Valor corrigido</th> -->
+		<th>Descricao</th>
+		<th>Pagar em</th>
+		<th>Data pagamento</th>
+		<th>Valor</th>
+		<th class="actions"></th>
+		<th class="actions"></th>
+		<th class="actions"></th>
+	</tr>
+	<% 
+		i = 0
+		total = 0
+	%>
+	<% @movimentos.each do |movimento| %>
+		<% 
+			i += 1
+	    	total += movimento.valor * movimento.tipo;
+		%>
+		<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (movimento.tipo < 0) %>">
+			<td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
+			<!-- ><td><%= movimento.valor_corrigido %></td> -->
+			<td><%= movimento.descricao %></td>
+			<td><%= to_date movimento.data_prevista  %></td>
+			<td><%= to_date movimento.data_realizacao %></td>
+			<td class="money"><%= to_currency movimento.valor %></td>
+			<td><%= link_to 'Show', movimento %></td>
+			<td><%= link_to 'Edit', edit_movimento_path(movimento) %></td>
+			<td><%= link_to 'Destroy', movimento, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+	<% end %>
 
-<% @movimentos.each do |movimento| %>
-  <tr>
-    <td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
-    <td><%= to_currency(movimento.valor) %></td>
-    <!-- ><td><%= movimento.valor_corrigido %></td> -->
-    <td><%= to_date(movimento.data_prevista)  %></td>
-    <td><%= to_date(movimento.data_realizacao) %></td>
-    <td><%= movimento.descricao %></td>
-    <td><%= link_to 'Show', movimento %></td>
-    <td><%= link_to 'Edit', edit_movimento_path(movimento) %></td>
-    <td><%= link_to 'Destroy', movimento, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+	<% i+=1 %>
+	<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (total < 0) %>">
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Total</td>
+		<td class="money"><%= to_currency total%></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+
 </table>
-
 <br />
 
 <%= link_to 'New Movimento', new_movimento_path %>
