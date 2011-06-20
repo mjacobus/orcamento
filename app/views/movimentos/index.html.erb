@@ -29,7 +29,7 @@
 			<td class="money"><%= to_currency movimento.valor %></td>
 			<td><%= link_to 'Ver', movimento %></td>
 			<td><%= link_to 'Alterar', edit_movimento_path(movimento) %></td>
-			<td><%= link_to 'Excluir', movimento, :confirm => 'Are you sure?', :method => :delete %></td>
+			<td><%= link_to 'Excluir', movimento, :confirm => 'Tem certeza?', :method => :delete %></td>
 		</tr>
 	<% end %>
 
@@ -48,4 +48,4 @@
 </table>
 <br />
 
-<%= link_to 'New Movimento', new_movimento_path %>
+<%= link_to 'Novo', new_movimento_path %>
