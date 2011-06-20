@@ -1,4 +1,6 @@
 Orcamento::Application.routes.draw do
+  resources :pessoas
+
   resources :movimentos
 
   # The priority is based upon order of creation:
