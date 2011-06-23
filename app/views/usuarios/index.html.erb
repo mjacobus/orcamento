@@ -1,0 +1,30 @@
+<h1>Listing usuarios</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Admin</th>
+    <th>Ativo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% i=0 %>
+<% @usuarios.each do |usuario| %>
+	<% i+=1 %>
+  <tr class="<%= 'even' if (i%2 == 0) %>">
+    <td><%= usuario.nome %></td>
+    <td><%= usuario.email %></td>
+    <td><%= usuario.admin %></td>
+    <td><%= usuario.ativo %></td>
+    <td><%= link_to 'Show', usuario %></td>
+    <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
+    <td><%= link_to 'Destroy', usuario, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Usuario', new_usuario_path %>

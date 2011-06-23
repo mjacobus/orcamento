@@ -22,7 +22,7 @@
 	    	total += movimento.valor * movimento.tipo;
 		%>
 		<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (movimento.tipo < 0) %>">
-			<td><%= movimento.pessoa.nome %></td>
+			<td><%= movimento.usuario.nome %></td>
 			<td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
 			<!-- ><td><%= movimento.valor_corrigido %></td> -->
 			<td><%= movimento.descricao %></td>

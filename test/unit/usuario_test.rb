@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PessoaTest < ActiveSupport::TestCase
+class UsuarioTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

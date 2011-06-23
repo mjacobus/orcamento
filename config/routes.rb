@@ -1,4 +1,6 @@
 Orcamento::Application.routes.draw do
+  resources :usuarios
+
   resources :pessoas
 
   match 'movimentos/pagos', :controller => :movimentos, :action => 'pagos'

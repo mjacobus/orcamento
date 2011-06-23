@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def menu
-    menu = %w(pessoas movimentos)
+    menu = %w(usuarios movimentos)
     ul = "<ul>"
     menu.each do |item|
       ul << "<li>" + link_to(item, :controller => item) + "</li>"
