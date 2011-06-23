@@ -6,6 +6,7 @@ Orcamento::Application.routes.draw do
 
   resources :movimentos
 
+  root :to => 'movimentos#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
