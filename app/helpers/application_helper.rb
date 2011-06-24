@@ -34,7 +34,7 @@ module ApplicationHelper
     
     ul << "</ul>"
     
-    raw ul
+    raw ul if params[:controller] != "session"
   end
 
 end
