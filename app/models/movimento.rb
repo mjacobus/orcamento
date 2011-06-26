@@ -10,5 +10,5 @@ class Movimento < ActiveRecord::Base
   end
   
   
-  belongs_to :pessoa
+  belongs_to :usuario
 end

@@ -1,0 +1,14 @@
+<h1>Login</h1>
+
+<%= form_tag :action => :process_login  do %>  
+  <p>  
+    <%= label_tag :email %><br />  
+    <%= text_field_tag :email, params[:email] %>  
+  </p>  
+  <p>  
+    <%= label_tag :senha %><br />  
+    <%= password_field_tag :senha %>  
+  </p>  
+  <p class="button"><%= submit_tag :login %></p>  
+<% end %>  
+
