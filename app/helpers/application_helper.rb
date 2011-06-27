@@ -13,6 +13,7 @@ module ApplicationHelper
 
     if current_user
       items = ActiveSupport::OrderedHash.new
+      items["Home"] = {:controller => :index}
       items["Usuários"] = {:controller => :usuarios}
       items["Movimentos"] = {:controller => :movimentos}
       items["Pendentes"] = {:controller => :movimentos, :action => "pendentes"}
