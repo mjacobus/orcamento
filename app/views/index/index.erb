@@ -1,0 +1,30 @@
+<h2>Relatorios por mês</h2>
+<ul>
+	<% @dates.each do |date| %>
+	<li>
+		<%= link_to("#{date.month.to_s}/#{date.year.to_s}", {:controller => "movimentos",:mes=> date.month, :ano =>date.year}) %>
+	</li>
+	<% end %>
+</ul>
+<h2>Usuário</h2>
+<ul>
+	<% @usuarios.each do |u| %>
+	<li>
+		<%= link_to(u.nome, {:controller => "movimentos",:usuario_id => u.id}) %>
+	</li>
+	<% end %>
+</ul>
+<h2>Usuário/Mês</h2>
+<ul>
+	<% @usuarios.each do |u| %>
+	<li>
+		<ul><%= u.nome %>
+			<% @dates.each do |date| %>
+			<li>
+				<%= link_to("#{date.month.to_s}/#{date.year.to_s}", {:controller => "movimentos",:mes=> date.month, :ano =>date.year, :usuario_id => u.id}) %>
+			</li>
+			<% end %>
+		</ul>
+	</li>
+	<% end %>
+</ul>
