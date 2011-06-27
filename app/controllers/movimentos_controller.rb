@@ -2,8 +2,44 @@ class MovimentosController < ApplicationController
   # GET /movimentos
   # GET /movimentos.xml
   def index
-    @movimentos = Movimento.order(:data_prevista, 'tipo DESC', :valor).includes(:usuario).all
+    
+    q = Movimento.includes(:usuario).order(:data_prevista, 'tipo DESC', :valor)
 
+    #usuario
+    q = q.where("usuario_id = ?", params[:usuario_id]) if params[:usuario_id]
+    # tipo
+    q = q.where("tipo= ?", params[:tipo]) if params[:tipo]
+    # realizado
+    if (params[:realizado])
+      if params[:realizado] == "true"
+        q = q.where('data_realizacao IS NOT NULL')
+      else
+        q = q.where('data_realizacao IS NULL')
+      end 
+    end
+     
+    
+
+    # data prevista
+    if params[:data_prevista_de] && params[:data_prevista_ate]
+      q = q.where(:data_prevista => params[:data_prevista_de]..params[:data_prevista_ate])
+    end
+
+    # data realizada
+    if params[:data_realizacao_de] && params[:data_realizacao_ate]
+      q = q.where(:data_realizacao => params[:data_realizacao_de]..params[:data_realizacao_ate])
+    end
+    
+    # data realizada
+    if params[:ano] && params[:mes]
+      ini_date = Date.new(params[:ano].to_i, params[:mes].to_i)
+      next_month = (ini_date+42)
+      end_date = Date.new(next_month.year,next_month.month) -1 
+      q = q.where(:data_prevista => ini_date.to_s..end_date.to_s)
+    end
+
+    @movimentos = q
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @movimentos }
@@ -80,16 +116,16 @@ class MovimentosController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def pagos
     @movimentos = Movimento.where('data_realizacao IS NOT NULL')
-    
+
     render :index
   end
-  
+
   def pendentes
     @movimentos = Movimento.where('data_realizacao IS NULL')
-    
+
     render :index
   end
 end
