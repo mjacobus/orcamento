@@ -1,57 +1,77 @@
 body {
-	background:#888888;
+	background: url(/stylesheets/img/background_blue_t.png) gray;
 	margin: 0;
+	padding:0;
+}
+ul {
+	padding:0;
+	margin:0;
+}
+a:link,a:active, a:hover, a:visited {
+	color:black;
+	text-decoration: none;
+	background:none;
 }
 
-#content{
+#content {
 	width: 800px;
 	margin: 0 auto;
-	background: white;
-	padding: 5px;
+	padding: 0px;
 	border: 1px solid #555555;
+	background:white;
 }
-
 #menu {
+	background: url(/stylesheets/img/background_blue_t.png) black;
 	width: 800px;
 	float:left;
 	margin-bottom: 30px;
+	color:white;
 }
-
+#menu a {
+	color:white;
+}
+#menu a:active {
+	color:white;
+	text-decoration: underline;
+}
 #menu ul li {
 	float: left;
 	display: block;
 	min-width: 100px;
 	height: 50px:
-	border: 1px solid #eee; 
+	border: 1px solid #eee;
 	padding: 5px;
+	text-align: center;
+}
+#menu ul li:hover {
+	background: url(/stylesheets/img/background_blue_t.png) blue;
+}
+#view {
+	padding: 5px;
+	margin-top: 20px;
 }
 
- table {
- 	width: 100%;
- }
- 
- th {
- 	background:black;
- 	color:white;
- }
- 
- th.actions {
- 	background: none;
- }
- 
- tr.even td{
- 	background: #eee;
- }
- 
- .money {
- 	text-align: right;
- 	color: blue;
- 	padding-right: 5px;
- }
- tr.despesa .money {
- 	color: red;
- }
- 
- th.actions {
- 	width: 30px;
- }
+table {
+	width: 100%;
+}
+th {
+	background: url(/stylesheets/img/background_blue_t.png);
+	color:white;
+}
+th.actions {
+	background: none;
+}
+tr.even td {
+	background: #eee;
+}
+.money {
+	text-align: right;
+	color: blue;
+	padding-right: 5px;
+}
+tr.despesa .money {
+	color: red;
+}
+th.actions {
+	width: 30px;
+}
