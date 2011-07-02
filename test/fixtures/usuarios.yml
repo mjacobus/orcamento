@@ -1,17 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  nome: MyString
-  email: MyString
-  senha_hash: MyString
-  senha_salt: MyString
+  nome: one@example.com
+  email: one@example.com
+  senha_hash: pa$$word
+  senha_salt: pa$$word
   admin: false
   ativo: false
 
 two:
-  nome: MyString
-  email: MyString
-  senha_hash: MyString
-  senha_salt: MyString
+  nome: two
+  email: two@example.com
+  senha_hash: pa$$word
+  senha_salt: pa$$word
   admin: false
   ativo: false
