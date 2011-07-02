@@ -1,17 +1,29 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+salario:
   tipo: 1
-  valor: 1.5
-  valor_corrigido: 1.5
-  pagar_em: 2011-06-19
-  data_pagamento: 2011-06-19
-  descricao: MyString
+  valor: 1000.00
+  valor_corrigido: 1000.00
+  data_prevista: 2011-06-19
+  data_realizacao: 2011-06-19
+  descricao: salario do tio
+  usuario: um
 
-two:
-  tipo: 1
-  valor: 1.5
+luz:
+  tipo: -1
+  valor: 500
   valor_corrigido: 1.5
-  pagar_em: 2011-06-19
-  data_pagamento: 2011-06-19
-  descricao: MyString
+  data_prevista: 2011-06-19
+  data_realizacao: 2011-06-19
+  descricao: pagamento de luz
+  usuario: um
+
+
+agua:
+  tipo: -1
+  valor: 100
+  valor_corrigido: 100
+  data_prevista: 2011-06-19
+  data_realizacao: 2011-06-19
+  descricao: pagamento de agua
+  usuario: um
