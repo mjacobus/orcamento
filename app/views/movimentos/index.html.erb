@@ -1,4 +1,4 @@
-<h1>Listing movimentos</h1>
+<h1><%= t("Listing") %> Movimentos</h1>
 <table>
 	<tr>
 		<th>Quem</th>
@@ -28,8 +28,8 @@
 			<td><%= movimento.descricao %></td>
 			<td><%= to_date movimento.data_prevista  %></td>
 			<td><%= to_date movimento.data_realizacao %></td>
-			<td class="money"><%= to_currency movimento.valor %></td>
-			<td><%= link_to 'Ver', movimento %></td>
+			<td class="money"><%= number_to_currency movimento.valor %></td>
+			<td><%= link_to 'Mostrar', movimento %></td>
 			<td><%= link_to 'Alterar', edit_movimento_path(movimento) %></td>
 			<td><%= link_to 'Excluir', movimento, :confirm => 'Tem certeza?', :method => :delete %></td>
 		</tr>
@@ -42,7 +42,7 @@
 		<td></td>
 		<td></td>
 		<td>Total</td>
-		<td class="money"><%= to_currency total%></td>
+		<td class="money"><%= number_to_currency total%></td>
 		<td></td>
 		<td></td>
 		<td></td>

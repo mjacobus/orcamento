@@ -1,7 +1,7 @@
 <%= form_for(@movimento) do |f| %>
   <% if @movimento.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@movimento.errors.count, "error") %> prohibited this movimento from being saved:</h2>
+      <h2><%= pluralize(@movimento.errors.count, "erro") + (@movimento.errors.count > 1 ? " ocorreu".pluralize : " ocorreu") %>:</h2>
 
       <ul>
       <% @movimento.errors.full_messages.each do |msg| %>

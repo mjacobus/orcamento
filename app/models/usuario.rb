@@ -5,7 +5,7 @@ class Usuario < ActiveRecord::Base
   before_save :encrypt_password
 
   validates :email, :presence => {:message => "Campo obrigatório"}, 
-    :uniqueness => {:case_sensitive => false,:message => "Este email já está em uso"}
+    :uniqueness => {:case_sensitive => false}
   validates :senha, :presence => {:on => :create}
   validates :nome, :presence => true
 

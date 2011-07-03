@@ -16,12 +16,12 @@
 </p>
 
 <p>
-  <b>Senha salt:</b>
+  <b>Sal:</b>
   <%= @usuario.senha_salt %>
 </p>
 
 <p>
-  <b>Admin:</b>
+  <b>Senha:</b>
   <%= @usuario.admin %>
 </p>
 
@@ -31,5 +31,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_usuario_path(@usuario) %> |
-<%= link_to 'Back', usuarios_path %>
+<%= link_to t('Edit'), edit_usuario_path(@usuario) %> |
+<%= link_to t('Back'), usuarios_path %>
