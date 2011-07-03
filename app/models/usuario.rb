@@ -4,7 +4,7 @@ class Usuario < ActiveRecord::Base
 
   before_save :encrypt_password
 
-  validates :email, :presence => {:message => "Campo obrigatório"}, 
+  validates :email, :presence => true, 
     :uniqueness => {:case_sensitive => false}
   validates :senha, :presence => {:on => :create}
   validates :nome, :presence => true
@@ -14,7 +14,7 @@ class Usuario < ActiveRecord::Base
   def validate_email
     if email.present?
       if !email.match(/^[\da-zAZ_\.]+@[a-zAZ_-]+(\.[a-z]{2,3}){1,2}$/)
-        errors.add(:email,'Email inválido')
+        errors.add(:email,'email inválido')
       end
     end
   end
@@ -22,7 +22,7 @@ class Usuario < ActiveRecord::Base
   def validate_senha
     if senha.present?
       if senha != senha_confirmacao
-        errors.add(:senha, "As senhas não conferem")
+        errors.add(:senha, "as senhas não conferem")
       elsif senha.length < 8
         errors.add(:senha, "deve ter pelo menos 8 caractéres")
       end
