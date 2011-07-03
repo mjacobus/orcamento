@@ -2,7 +2,7 @@ class MovimentosController < ApplicationController
   # GET /movimentos
   # GET /movimentos.xml
   def index
-    
+
     q = Movimento.includes(:usuario).order(:data_prevista, 'tipo DESC', :valor)
 
     #usuario
@@ -15,31 +15,37 @@ class MovimentosController < ApplicationController
         q = q.where('data_realizacao IS NOT NULL')
       else
         q = q.where('data_realizacao IS NULL')
-      end 
-    end
-     
-    
-
-    # data prevista
-    if params[:data_prevista_de] && params[:data_prevista_ate]
-      q = q.where(:data_prevista => params[:data_prevista_de]..params[:data_prevista_ate])
+      end
     end
 
-    # data realizada
-    if params[:data_realizacao_de] && params[:data_realizacao_ate]
-      q = q.where(:data_realizacao => params[:data_realizacao_de]..params[:data_realizacao_ate])
-    end
-    
-    # data realizada
-    if params[:ano] && params[:mes]
-      ini_date = Date.new(params[:ano].to_i, params[:mes].to_i)
+    if !params[:all]
+      if !params[:ano] && !params[:mes]
+        d = Time.now
+        params[:ano] = d.year
+        params[:mes] = d.month
+      end
+
+      # data prevista
+      if params[:data_prevista_de] && params[:data_prevista_ate]
+        q = q.where(:data_prevista => params[:data_prevista_de]..params[:data_prevista_ate])
+      end
+
+      # data realizada
+      if params[:data_realizacao_de] && params[:data_realizacao_ate]
+        q = q.where(:data_realizacao => params[:data_realizacao_de]..params[:data_realizacao_ate])
+      end
+
+      # data realizada
+      if params[:ano] && params[:mes]
+        ini_date = Date.new(params[:ano].to_i, params[:mes].to_i)
       next_month = (ini_date+42)
-      end_date = Date.new(next_month.year,next_month.month) -1 
+      end_date = Date.new(next_month.year,next_month.month) -1
       q = q.where(:data_prevista => ini_date.to_s..end_date.to_s)
+      end
     end
 
     @movimentos = q
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @movimentos }
@@ -122,7 +128,7 @@ class MovimentosController < ApplicationController
 
   def pagos
     redirect_to :action => :index,:realizado => "true"
-   end
+  end
 
   def pendentes
     redirect_to :action => :index,:realizado => "false"
