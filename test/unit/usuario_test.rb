@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsuarioTest < ActiveSupport::TestCase
   
-  fixtures :usuarios
+  fixtures :usuarios,:movimentos
   
   def setup
     @usuario = Usuario.first
@@ -50,6 +50,17 @@ class UsuarioTest < ActiveSupport::TestCase
     @usuario.nome = nil
     assert_equal false, @usuario.valid?
     assert_equal @usuario.errors[:nome][0], "não pode ficar em branco"
+  end
+  
+  def test_usuario_cannot_be_deleted_if_has_movimentos
+    movimento = Movimento.create(:valor => 10,:descricao => "teste",
+      :data_prevista => "2011-01-01", :tipo => 1, :usuario_id => @usuario.id)
+    assert_equal true, movimento.valid?  
+    @usuario.reload
+    assert_equal true, @usuario.movimentos.count() > 0
+    assert_equal false, @usuario.destroy
+    assert_equal true, movimento.destroy != false
+    assert_equal true, @usuario.destroy != false
   end
 
 

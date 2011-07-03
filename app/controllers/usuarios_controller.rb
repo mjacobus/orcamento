@@ -79,7 +79,7 @@ class UsuariosController < ApplicationController
     messageType = success ? :notice : :alert
 
     respond_to do |format|
-      format.html { redirect_to(movimentos_url, messageType => message) }
+      format.html { redirect_to(usuarios_url, messageType => message) }
       format.xml  { head :ok }
     end
   end
