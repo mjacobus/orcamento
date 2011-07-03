@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsuarioTest < ActiveSupport::TestCase
   
-  fixtures :usuarios
+  fixtures :usuarios,:movimentos
   
   def setup
     @usuario = Usuario.first
@@ -23,7 +23,7 @@ class UsuarioTest < ActiveSupport::TestCase
         @usuario.email = email
         assert_equal valid, @usuario.valid?
         if (!valid)
-          assert_equal @usuario.errors[:email][0], "Email inválido"
+          assert_equal @usuario.errors[:email][0], "email inválido"
         end 
       end
   end
@@ -36,14 +36,32 @@ class UsuarioTest < ActiveSupport::TestCase
     novo_usuario.senha_salt = @usuario.senha_salt
     novo_usuario.senha_hash = @usuario.senha_hash
     assert_equal novo_usuario.valid?, false
-    assert_equal novo_usuario.errors[:email][0], "Este email já está em uso"
+    assert_equal novo_usuario.errors[:email][0], "já está em uso"
   end
   
   def test_email_is_required
     @usuario.email = nil
     assert_equal false, @usuario.valid?
-    assert_equal "Campo obrigatório", @usuario.errors[:email][0]
+    assert_equal @usuario.errors[:email][0], "não pode ficar em branco"
   end
   
+  def test_nome_is_required
+    @usuario.reload
+    @usuario.nome = nil
+    assert_equal false, @usuario.valid?
+    assert_equal @usuario.errors[:nome][0], "não pode ficar em branco"
+  end
+  
+  def test_usuario_cannot_be_deleted_if_has_movimentos
+    movimento = Movimento.create(:valor => 10,:descricao => "teste",
+      :data_prevista => "2011-01-01", :tipo => 1, :usuario_id => @usuario.id)
+    assert_equal true, movimento.valid?  
+    @usuario.reload
+    assert_equal true, @usuario.movimentos.count() > 0
+    assert_equal false, @usuario.destroy
+    assert_equal true, movimento.destroy != false
+    assert_equal true, @usuario.destroy != false
+  end
+
 
 end

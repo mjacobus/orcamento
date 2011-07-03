@@ -3,8 +3,9 @@ class Usuario < ActiveRecord::Base
   attr_accessor :senha, :senha_confirmacao
 
   before_save :encrypt_password
+  before_destroy :verify_movimentos
 
-  validates :email, :presence => {:message => "Campo obrigatório"}, 
+  validates :email, :presence => true,
     :uniqueness => {:case_sensitive => false}
   validates :senha, :presence => {:on => :create}
   validates :nome, :presence => true
@@ -14,7 +15,7 @@ class Usuario < ActiveRecord::Base
   def validate_email
     if email.present?
       if !email.match(/^[\da-zAZ_\.]+@[a-zAZ_-]+(\.[a-z]{2,3}){1,2}$/)
-        errors.add(:email,'Email inválido')
+        errors.add(:email,'email inválido')
       end
     end
   end
@@ -22,7 +23,7 @@ class Usuario < ActiveRecord::Base
   def validate_senha
     if senha.present?
       if senha != senha_confirmacao
-        errors.add(:senha, "As senhas não conferem")
+        errors.add(:senha, "as senhas não conferem")
       elsif senha.length < 8
         errors.add(:senha, "deve ter pelo menos 8 caractéres")
       end
@@ -40,11 +41,16 @@ class Usuario < ActiveRecord::Base
   def self.authenticate(email, senha)
     usuario = find_by_email(email)
     if usuario && usuario.senha_hash == BCrypt::Engine.hash_secret(senha, usuario.senha_salt)
-      usuario
+    usuario
     else
-      nil
+    nil
     end
   end
 
   has_many :movimentos
+
+  def verify_movimentos
+    # só se exclui usuário que não tem movimentos
+    movimentos.count() == 0
+  end
 end
