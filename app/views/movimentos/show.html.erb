@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Quem:</b>
   <%= @movimento.usuario.nome %>
@@ -12,7 +10,7 @@
 
 <p>
   <b>Valor:</b>
-  <%= to_currency @movimento.valor %>
+  <%= number_to_currency @movimento.valor %>
 </p>
 
 <!-- 
@@ -33,10 +31,10 @@
 </p>
 
 <p>
-  <b>Descricao:</b>
+  <b>Descrição:</b>
   <%= @movimento.descricao %>
 </p>
 
 
-<%= link_to 'Edit', edit_movimento_path(@movimento) %> |
-<%= link_to 'Back', movimentos_path %>
+<%= link_to 'Alterar', edit_movimento_path(@movimento) %> |
+<%= link_to 'Voltar', movimentos_path %>
