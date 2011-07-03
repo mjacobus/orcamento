@@ -80,7 +80,7 @@ class MovimentosController < ApplicationController
 
     respond_to do |format|
       if @movimento.save
-        format.html { redirect_to(@movimento, :notice => 'Movimento was successfully created.') }
+        format.html { redirect_to(@movimento, :notice => 'Movimento criado com sucesso.') }
         format.xml  { render :xml => @movimento, :status => :created, :location => @movimento }
       else
         format.html { render :action => "new" }
@@ -96,7 +96,7 @@ class MovimentosController < ApplicationController
 
     respond_to do |format|
       if @movimento.update_attributes(params[:movimento])
-        format.html { redirect_to(@movimento, :notice => 'Movimento was successfully updated.') }
+        format.html { redirect_to(@movimento, :notice => 'Movimento atualizado com sucesso.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -109,23 +109,22 @@ class MovimentosController < ApplicationController
   # DELETE /movimentos/1.xml
   def destroy
     @movimento = Movimento.find(params[:id])
-    @movimento.destroy
+    success = @movimento.destroy
+
+    message = success ? "Movimento excluído com sucesso." : "Erro ao excluir movimento"
+    messageType = success ? :notice : :alert
 
     respond_to do |format|
-      format.html { redirect_to(movimentos_url) }
+      format.html { redirect_to(movimentos_url,messageType => message) }
       format.xml  { head :ok }
     end
   end
 
   def pagos
-    @movimentos = Movimento.where('data_realizacao IS NOT NULL')
-
-    render :index
-  end
+    redirect_to :action => :index,:realizado => "true"
+   end
 
   def pendentes
-    @movimentos = Movimento.where('data_realizacao IS NULL')
-
-    render :index
+    redirect_to :action => :index,:realizado => "false"
   end
 end
