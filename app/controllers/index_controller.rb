@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
   def index
     @dates = []
-    for i in -5..5 do
+    for i in -4..5 do
       @dates << Time.now.advance(:months => i)
     end
 

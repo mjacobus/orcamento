@@ -12,43 +12,60 @@
 		<th class="actions"></th>
 		<th class="actions"></th>
 	</tr>
-	<% 
-		i = 0
-		total = 0
-	%>
+	<% i = 0
+    totals = ActiveSupport::OrderedHash.new
+    ["Recebido","A Receber","Pago","A Pagar"].each do |k|
+      totals[k] = 0
+    end
+%>
 	<% @movimentos.each do |movimento| %>
-		<% 
-			i += 1
-	    	total += movimento.valor * movimento.tipo;
-		%>
-		<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (movimento.tipo < 0) %>">
-			<td><%= movimento.usuario.nome %></td>
-			<td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
-			<!-- ><td><%= movimento.valor_corrigido %></td> -->
-			<td><%= movimento.descricao %></td>
-			<td><%= to_date movimento.data_prevista  %></td>
-			<td><%= to_date movimento.data_realizacao %></td>
-			<td class="money"><%= number_to_currency movimento.valor %></td>
-			<td><%= link_to 'Mostrar', movimento %></td>
-			<td><%= link_to 'Alterar', edit_movimento_path(movimento) %></td>
-			<td><%= link_to 'Excluir', movimento, :confirm => 'Tem certeza?', :method => :delete %></td>
-		</tr>
-	<% end %>
-
-	<% i+=1 %>
-	<tr class="<%= 'even' if (i%2 == 0) %><%= ' despesa' if (total < 0) %>">
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td>Total</td>
-		<td class="money"><%= number_to_currency total%></td>
-		<td></td>
-		<td></td>
-		<td></td>
+	<%
+	i += 1
+	value = movimento.valor * movimento.tipo;
+	if movimento.data_realizacao
+	totals["Pago"] += value if movimento.tipo == -1
+	totals["Recebido"] += value if movimento.tipo == 1
+	else
+	totals["A Pagar"] += value if movimento.tipo == -1
+	totals["A Receber"] += value if movimento.tipo == 1
+	end
+	%>
+	<tr class="<%= 'even' if (i.odd? == 0) %><%= ' despesa' if (movimento.tipo < 0) %>">
+		<td><%= movimento.usuario.nome %></td>
+		<td><%= (movimento.tipo > 0) ? "Receita": "Despesa" %></td>
+		<!-- ><td><%= movimento.valor_corrigido %></td> -->
+		<td><%= movimento.descricao %></td>
+		<td><%= to_date movimento.data_prevista  %></td>
+		<td><%= to_date movimento.data_realizacao %></td>
+		<td class="money"><%= number_to_currency movimento.valor %></td>
+		<td><%= link_to 'Mostrar', movimento %></td>
+		<td><%= link_to 'Alterar', edit_movimento_path(movimento) %></td>
+		<td><%= link_to 'Excluir', movimento, :confirm => 'Tem certeza?', :method => :delete %></td>
 	</tr>
-
+	<% end %>
 </table>
+<%
+ totals["Total Despesas"] = totals["A Pagar"] +  totals["Pago"]
+  totals["Total Receitas"] = totals["A Receber"] +  totals["Recebido"]
+  totals["Saldo Atual"] = totals["Recebido"] +  totals["Pago"]
+  totals["Saldo Previsto"] = totals["Total Despesas"] + totals["Total Receitas"]
+%>
+<ul class="totals">
+	<%i = 0%>
+	<% totals.each do |tipo,valor|%>
+		<%i+=1%>
+	<li class="<%= ' even' if i.even?%>">
+		<%= tipo %>
+	</li>
+	<li class="money <%= ' despesa' if (valor<0) %> <%= ' even' if i.even?%>">
+		<%if (valor<0) %>
+		<%= number_to_currency valor*-1%>
+		<%else %>
+		<%= number_to_currency valor%>
+		<%end%>
+	</li>
+	<% end %>
+</ul>
 <br />
 
 <%= link_to 'Novo', new_movimento_path %>
