@@ -12,9 +12,11 @@
 		<th class="actions"></th>
 		<th class="actions"></th>
 	</tr>
-	<% i = 0
+	<% 
+	i = 0
     totals = ActiveSupport::OrderedHash.new
-    ["Recebido","A Receber","Pago","A Pagar"].each do |k|
+    ["Recebido","A Receber","Total Receitas","Pago","A Pagar",
+		"Total Despesas","Saldo Atual","Saldo Previsto"].each do |k|
       totals[k] = 0
     end
 %>
