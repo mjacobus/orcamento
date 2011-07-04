@@ -31,5 +31,9 @@ module ApplicationHelper
       raw ul
     end
   end
+  
+  def get_classes
+    "#{params[:controller]}_controller #{params[:action]}_action"
+  end
 
 end

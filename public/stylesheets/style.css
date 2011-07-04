@@ -3,22 +3,31 @@ body {
 	margin: 0;
 	padding:0;
 }
+h2, h3, h4, h5, h6 {
+	font-size: 14px;
+	clear: both;
+	margin:0;
+	margin-top: 30px;
+}
 ul {
 	padding:0;
 	margin:0;
 }
-a:link,a:active, a:hover, a:visited {
+li {
+	list-style: none;
+}
+a:link, a:active, a:hover, a:visited {
 	color:black;
 	text-decoration: none;
 	background:none;
 }
-
 #content {
 	width: 800px;
 	margin: 0 auto;
 	padding: 0px;
 	border: 1px solid #555555;
 	background:white;
+	overflow: auto;
 }
 #menu {
 	background: url(/stylesheets/img/background_blue_t.png) black;
@@ -38,7 +47,8 @@ a:link,a:active, a:hover, a:visited {
 	float: left;
 	display: block;
 	min-width: 100px;
-	height: 50px:
+	height: 50px
+	:
 	border: 1px solid #eee;
 	padding: 5px;
 	text-align: center;
@@ -50,7 +60,6 @@ a:link,a:active, a:hover, a:visited {
 	padding: 5px;
 	margin-top: 20px;
 }
-
 table {
 	width: 100%;
 }
@@ -74,4 +83,54 @@ tr.despesa .money {
 }
 th.actions {
 	width: 30px;
+}
+.index_controller #view ul {
+	clear:both;
+	display:block;
+	float: left;
+}
+.index_controller #view li {
+	float:left;
+	width: 50px;
+	border: solid 1px #eee;
+	margin: 0 5px;
+	text-align: center;
+}
+.index_controller #view  .user {
+	border: none;
+	width: 100%;
+	float:left;
+	clear:both;
+}
+.index_controller #view  .user span {
+	float:left;
+	display:block;
+	margin-top: 5px;
+}
+ul.totals {
+	width: 200px;
+	border: 1px solid #bbb;
+	float:right;
+	display:block;
+	background: #eee;
+	color: black;
+}
+ul.totals li{
+	width: 100px;
+	border: 1px solid blue;
+	float: left;
+	display:block;
+	margin: 0;
+	padding: 0 5px;
+	border: none;
+	
+}
+ul.totals li.even{
+	background: #ddd;
+}
+ul.totals li.money{
+	width: 76px;
+}
+ul.totals li.despesa{
+	color:red;
 }
