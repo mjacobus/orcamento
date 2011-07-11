@@ -4,18 +4,19 @@ class MovimentosController < ApplicationController
   def index
 
     q = Movimento.includes(:usuario).order(:data_prevista, 'tipo DESC', :valor)
+    w = ["1 = 1"]
+    p = {}
 
-    #usuario
-    q = q.where("usuario_id = ?", params[:usuario_id]) if params[:usuario_id]
+    # usuario
+    if params[:usuario_id]
+      w << "usuario_id = :usuario_id"
+      p[:usuario_id] = params[:usuario_id]
+    end
+
     # tipo
-    q = q.where("tipo= ?", params[:tipo]) if params[:tipo]
-    # realizado
-    if (params[:realizado])
-      if params[:realizado] == "true"
-        q = q.where('data_realizacao IS NOT NULL')
-      else
-        q = q.where('data_realizacao IS NULL')
-      end
+    if params[:tipo]
+      w << "(tipo = :tipo)"
+      p[:tipo] = params[:tipo]
     end
 
     if !params[:all]
@@ -25,26 +26,40 @@ class MovimentosController < ApplicationController
         params[:mes] = d.month
       end
 
-      # data prevista
-      if params[:data_prevista_de] && params[:data_prevista_ate]
-        q = q.where(:data_prevista => params[:data_prevista_de]..params[:data_prevista_ate])
-      end
-
       # data realizada
-      if params[:data_realizacao_de] && params[:data_realizacao_ate]
-        q = q.where(:data_realizacao => params[:data_realizacao_de]..params[:data_realizacao_ate])
-      end
-
-      # data realizada
+      ini_date = Date.new(params[:ano].to_i, params[:mes].to_i)
       if params[:ano] && params[:mes]
-        ini_date = Date.new(params[:ano].to_i, params[:mes].to_i)
-      next_month = (ini_date+42)
-      end_date = Date.new(next_month.year,next_month.month) -1
-      q = q.where(:data_prevista => ini_date.to_s..end_date.to_s)
+        next_month = (ini_date+42)
+        end_date = Date.new(next_month.year,next_month.month) -1
+        
+        w << "data_prevista BETWEEN :ini_date AND :end_date"
+        p[:ini_date] = ini_date
+        p[:end_date] = end_date
+      end
+
+      # realizado
+      pendente = false
+      if (params[:realizado])
+        if params[:realizado] == "true"
+          w << "data_realizacao IS NOT NULL"
+        else
+          w << "data_realizacao IS NULL"
+          pendente = true
+        end
       end
     end
-
-    @movimentos = q
+    
+    w = "(#{w.join(" AND ")})"
+        
+    if (pendente) 
+      orw = ["data_realizacao IS NULL AND data_prevista <= :ini_date"] 
+      if p[:usuario_id]
+        orw << "usuario_id = :usuario_id"
+      end
+      w << " OR (#{orw.join(' AND ')})"
+    end
+    
+    @movimentos = q.where(w,p)
 
     respond_to do |format|
       format.html # index.html.erb
