@@ -32,7 +32,7 @@ class MovimentosController < ApplicationController
         next_month = (ini_date+42)
         end_date = Date.new(next_month.year,next_month.month) -1
         
-        w << "data_prevista BETWEEN :ini_date AND :end_date"
+        w << "(data_prevista BETWEEN :ini_date AND :end_date || data_realizacao BETWEEN :ini_date AND :end_date)"
         p[:ini_date] = ini_date
         p[:end_date] = end_date
       end
